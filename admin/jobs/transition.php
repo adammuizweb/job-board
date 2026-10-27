@@ -38,7 +38,7 @@ try {
     if (!in_array($target, $allowed[$job['status']] ?? [], true)) throw new DomainException(jyb_t('That job transition is not allowed.'));
     if ($target === 'published') {
         if (jyb_application_target($job['application_type'], $job['application_target']) === null) {
-            throw new DomainException(jyb_t('A valid application target is required before publishing.'));
+            throw new DomainException(jyb_t('The application target is invalid.'));
         }
         $jobText = $pdo->prepare("SELECT 1 FROM jyb_job_texts WHERE job_id=? AND locale=? AND translation_status='published' LIMIT 1 FOR UPDATE");
         $jobText->execute([$id,$job['source_locale']]);

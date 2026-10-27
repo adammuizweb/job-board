@@ -83,7 +83,7 @@ function jyb_public_job_page(PDO $pdo, string $locale, array $filters = [], int 
     if ($filters['category'] > 0) { $where[] = 'EXISTS (SELECT 1 FROM jyb_job_categories jcf WHERE jcf.job_id=j.id AND jcf.category_id=:category)'; $params[':category'] = $filters['category']; }
     foreach ([['employment','j.employment_type'],['workplace','j.workplace_type']] as [$key,$column]) if ($filters[$key] !== '') { $where[] = $column . '=:' . $key; $params[':' . $key] = $filters[$key]; }
     if ($filters['featured'] === '1') $where[] = 'j.featured=1';
-    $where[] = "((j.application_type='url' AND j.application_target LIKE 'https://%') OR (j.application_type='email' AND j.application_target LIKE '%@%'))";
+    $where[] = "((j.application_type='none' AND j.application_target='') OR (j.application_type='url' AND j.application_target LIKE 'https://%') OR (j.application_type='email' AND j.application_target LIKE '%@%'))";
     $from = ' FROM jyb_jobs j JOIN jyb_job_texts jt ON jt.job_id=j.id AND jt.locale=:job_locale JOIN jyb_companies c ON c.id=j.company_id JOIN jyb_company_texts ct ON ct.company_id=c.id AND ct.locale=:company_locale';
     $whereSql = implode(' AND ', $where);
     $count = $pdo->prepare('SELECT COUNT(DISTINCT j.id)' . $from . ' WHERE ' . $whereSql);

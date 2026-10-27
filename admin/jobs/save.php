@@ -24,7 +24,7 @@ try {
         throw new DomainException(jyb_t('Select valid employment and workplace types.'));
     }
     $application = jyb_application_target($_POST['application_type'] ?? '', $_POST['application_target'] ?? '');
-    if ($application === null) throw new DomainException(jyb_t('Enter exactly one valid HTTPS application URL or email address.'));
+    if ($application === null) throw new DomainException(jyb_t('Enter a valid HTTPS application URL, email address, or leave the target empty for an informational job.'));
     $opens = jyb_admin_datetime_to_utc($_POST['opens_at_utc'] ?? '');
     $closes = jyb_admin_datetime_to_utc($_POST['closes_at_utc'] ?? '');
     if ((jyb_scalar($_POST['opens_at_utc'] ?? '') !== '' && $opens === null)

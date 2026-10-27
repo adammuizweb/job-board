@@ -11,8 +11,9 @@ upstream release identity, not downstream identity.
 - The plugin owns companies, localized company text, categories, localized
   category text, jobs, localized job text, job-category assignments, settings,
   public presentation, and its audit trail.
-- A job accepts applications through exactly one validated HTTPS URL or one
-  email address. The plugin never stores applicants, submissions, or uploads.
+- A job may link applications to one validated HTTPS URL or email address, or
+  be published as information-only with no application target. The plugin never
+  stores applicants, submissions, or uploads.
 - Jobs use draft, published, closed, and archived workflows. Ordinary hard
   deletion is not a product operation; close, archive, and restore instead.
 - Content Translation is optional. Public localized reads never fall back to a
@@ -32,8 +33,8 @@ upstream release identity, not downstream identity.
 - Public queries require a published job, published text in the exact locale,
   a published company, and published company text in that exact locale.
 - Escape text by default. Application URLs allow HTTPS only; application email
-  targets are validated addresses. Theme overrides require realpath containment
-  and reject symlinks.
+  targets are validated addresses; information-only jobs require an empty
+  target. Theme overrides require realpath containment and reject symlinks.
 
 ## Verification
 

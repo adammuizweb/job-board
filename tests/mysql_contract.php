@@ -34,6 +34,8 @@ try {
     foreach (array_filter(array_map('trim', explode(';', $sql))) as $statement) $pdo->exec($statement);
     $verify = require $root . '/migrations/0002-verify-schema.php';
     $verify($pdo);
+    $informationOnlyMigration = require $root . '/migrations/0003-information-only-applications.php';
+    $informationOnlyMigration($pdo);
     $check(jyb_schema_ready($pdo), 'fresh schema passes strict verification');
 
     $now = '2026-10-26 12:00:00';
@@ -65,6 +67,23 @@ try {
     $check(jyb_public_job_by_slug($pdo, 'de', 'beispiel-rolle') === null, 'draft company locale also fails closed');
     $pdo->exec("UPDATE jyb_company_texts SET translation_status='published' WHERE company_id={$company} AND locale='de'");
     $check(is_array(jyb_public_job_by_slug($pdo, 'de', 'beispiel-rolle')), 'fully eligible localized job becomes public');
+
+    $pdo->prepare('INSERT INTO jyb_jobs (company_id,source_locale,status,employment_type,workplace_type,reference_code,application_type,application_target,published_at_utc,created_at_utc,updated_at_utc) VALUES (?,?,?,?,?,?,?,?,?,?,?)')
+        ->execute([$company,'en','published','temporary','on-site','REF-INFO','none','',$now,$now,$now]);
+    $informationOnlyJob = (int)$pdo->lastInsertId();
+    $text->execute([$informationOnlyJob,'en','information-only-role','Information Only Role','Summary','Description','Office','published',$now]);
+    $pdo->prepare('INSERT INTO jyb_job_categories VALUES (?,?)')->execute([$informationOnlyJob,$category]);
+    $check(is_array(jyb_public_job_by_slug($pdo,'en','information-only-role')),'information-only job is publicly eligible without an application target');
+    $page = jyb_public_job_page($pdo,'en',[],1,12);
+    $check($page['total']===2&&count($page['rows'])===2,'public list includes information-only jobs');
+
+    $invalidInformationTargetRejected = false;
+    try {
+        $pdo->prepare('UPDATE jyb_jobs SET application_target=? WHERE id=?')->execute(['unexpected',$informationOnlyJob]);
+    } catch (PDOException) {
+        $invalidInformationTargetRejected = true;
+    }
+    $check($invalidInformationTargetRejected,'database requires empty targets for information-only jobs');
 
     $constraintRejected = false;
     try {

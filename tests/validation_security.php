@@ -6,6 +6,7 @@ $check(jyb_locale('en_US')==='en-US'&&jyb_locale('pt-BR')==='pt-BR'&&jyb_locale(
 $check(jyb_https_url('https://example.test/apply')==='https://example.test/apply'&&jyb_https_url('http://example.test')===null&&jyb_https_url('javascript:alert(1)')===null,'external URLs require HTTPS');
 $check(jyb_application_target('email','jobs@example.test')!==null&&jyb_application_target('email',"x@example.test\r\nBcc:a@example.test")===null,'application email validates and blocks header injection');
 $check(jyb_application_target('url','https://example.test/apply')!==null&&jyb_application_target('url','mailto:x@example.test')===null,'application target is exactly one typed destination');
+$check(jyb_application_target('none','')===['type'=>'none','target'=>'']&&jyb_application_target('none','unexpected')===null,'information-only jobs require an empty application target');
 $check(jyb_datetime_utc('2026-10-26T12:30')==='2026-10-26 12:30:00'&&jyb_datetime_utc('not-a-date')===null,'UTC datetime-local input validates strictly');
 $check(jyb_job_statuses()===['draft','published','closed','archived'],'dashboard and workflow share the canonical job statuses');
 $filters=jyb_public_filters(['q'=>['bad'],'company'=>'999999999999999999999','employment'=>'invalid','workplace'=>'remote','featured'=>'1']);$check($filters['q']===''&&$filters['company']===0&&$filters['employment']===''&&$filters['workplace']==='remote'&&$filters['featured']==='1','public filters reject arrays and invalid bounded values');

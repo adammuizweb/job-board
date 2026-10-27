@@ -28,8 +28,9 @@ views/themes/{active}/plugins/job-board/widget-list.php
 
 ## Applications
 
-Each job has exactly one application target: an HTTPS URL or an email address.
-This plugin links applicants to that target and does not collect applicant data,
+Each job may have one application target, either an HTTPS URL or an email
+address, or be published as information-only with no target. This plugin links
+applicants only when a target is provided and does not collect applicant data,
 files, forms, subscriptions, analytics, or payments.
 
 ## Presets And Widget
@@ -47,7 +48,7 @@ public route. Registration fails closed on a source or widget name collision.
 
 ## Translation
 
-Version 0.1.1 stores and edits plugin-owned locale rows and deterministically
+Version 0.1.2 stores and edits plugin-owned locale rows and deterministically
 uses the current Core content locale. When a compatible Content Translation
 host is active, Job Board registers its generic resource adapter for prefixed
 routes, canonical alternates, language switching, and transaction-time locale

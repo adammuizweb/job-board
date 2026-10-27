@@ -85,12 +85,12 @@ $timezone = function_exists('app_timezone_id') ? app_timezone_id() : 'UTC';
         <div class="jyb-card-head">
           <div class="jyb-admin-heading">
             <h2><?= jyb_h(jyb_t('Application target')) ?></h2>
-            <p><?= jyb_h(jyb_t('Choose exactly one HTTPS URL or email address. Job Board does not collect applications.')) ?></p>
+            <p><?= jyb_h(jyb_t('Choose an HTTPS URL, email address, or publish the vacancy as information only. Job Board does not collect applications.')) ?></p>
           </div>
         </div>
         <div class="jyb-grid two">
-          <label><?= jyb_h(jyb_t('Target type')) ?><select class="inp" name="application_type"><option value="url" <?= $job['application_type'] === 'url' ? 'selected' : '' ?>><?= jyb_h(jyb_t('HTTPS URL')) ?></option><option value="email" <?= $job['application_type'] === 'email' ? 'selected' : '' ?>><?= jyb_h(jyb_t('Email')) ?></option></select></label>
-          <label><?= jyb_h(jyb_t('Application target')) ?><input class="inp" name="application_target" maxlength="2048" required value="<?= jyb_h($job['application_target']) ?>"></label>
+          <label><?= jyb_h(jyb_t('Target type')) ?><select class="inp" name="application_type"><option value="url" <?= $job['application_type'] === 'url' ? 'selected' : '' ?>><?= jyb_h(jyb_t('HTTPS URL')) ?></option><option value="email" <?= $job['application_type'] === 'email' ? 'selected' : '' ?>><?= jyb_h(jyb_t('Email')) ?></option><option value="none" <?= $job['application_type'] === 'none' ? 'selected' : '' ?>><?= jyb_h(jyb_t('Information only')) ?></option></select></label>
+          <label><?= jyb_h(jyb_t('Application target')) ?><input class="inp" name="application_target" maxlength="2048" value="<?= jyb_h($job['application_target']) ?>"></label>
         </div>
       </section>
 

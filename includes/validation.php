@@ -58,6 +58,7 @@ function jyb_application_target(mixed $type, mixed $target): ?array
 {
     $type = strtolower(trim(jyb_scalar($type)));
     $target = trim(jyb_scalar($target));
+    if ($type === 'none') return $target === '' ? ['type' => 'none', 'target' => ''] : null;
     if ($type === 'url') {
         $url = jyb_https_url($target, false);
         return $url === null ? null : ['type' => 'url', 'target' => $url];
