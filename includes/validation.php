@@ -87,6 +87,11 @@ function jyb_workplace_types(): array
     return ['on-site','hybrid','remote'];
 }
 
+function jyb_job_statuses(): array
+{
+    return ['draft','published','closed','archived'];
+}
+
 function jyb_public_filters(array $input): array
 {
     $employment = strtolower(jyb_text($input['employment'] ?? '', 30));

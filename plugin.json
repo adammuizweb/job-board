@@ -1,8 +1,9 @@
 {
   "name": "job-board",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "title": "Job Board",
   "description": "Publish localized vacancies with companies, categories, and controlled application links.",
+  "icon": "icon.svg",
   "author": "Adam Muiz",
   "author_uri": "https://jyavani.com/member/adammuiz/",
   "plugin_uri": "https://jyavani.com/plugin/job-board/",

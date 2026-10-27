@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1 - 2026-10-27
+
+- Fixed the dashboard job list failing when loading its workflow status filters.
+- Added a packaged SVG icon for installed-plugin and Store surfaces.
+
 ## 0.1.0 - 2026-10-27
 
 - Initial release with localized jobs, companies, and categories.

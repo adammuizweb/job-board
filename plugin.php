@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 if (!defined('BACKEND_PATH')) return;
 
-const JYB_VERSION = '0.1.0';
+const JYB_VERSION = '0.1.1';
 const JYB_PERMISSION_READ = 'plugin.job-board.workspace.read';
 const JYB_PERMISSION_CREATE = 'plugin.job-board.jobs.create';
 const JYB_PERMISSION_EDIT = 'plugin.job-board.jobs.edit';

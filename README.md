@@ -47,7 +47,7 @@ public route. Registration fails closed on a source or widget name collision.
 
 ## Translation
 
-Version 0.1.0 stores and edits plugin-owned locale rows and deterministically
+Version 0.1.1 stores and edits plugin-owned locale rows and deterministically
 uses the current Core content locale. When a compatible Content Translation
 host is active, Job Board registers its generic resource adapter for prefixed
 routes, canonical alternates, language switching, and transaction-time locale
