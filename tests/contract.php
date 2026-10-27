@@ -2,7 +2,7 @@
 declare(strict_types=1);
 $root=dirname(__DIR__);$failures=[];$check=static function(bool $ok,string $message)use(&$failures):void{echo($ok?'PASS':'FAIL').' '.$message.PHP_EOL;if(!$ok)$failures[]=$message;};
 $manifest=json_decode((string)file_get_contents($root.'/plugin.json'),true,512,JSON_THROW_ON_ERROR);
-$check(($manifest['name']??'')==='job-board'&&($manifest['version']??'')==='0.1.2','manifest identity and version are exact');
+$check(($manifest['name']??'')==='job-board'&&($manifest['version']??'')==='0.1.3','manifest identity and version are exact');
 $check(($manifest['icon']??'')==='icon.svg'&&is_file($root.'/icon.svg'),'manifest declares the packaged SVG icon');
 $check(($manifest['author']??'')==='Adam Muiz'
     &&($manifest['author_uri']??'')==='https://jyavani.com/member/adammuiz/'
@@ -24,7 +24,7 @@ $staticSources=array_column($manifest['static']['copy']??[],'from');
 $check(count($staticSources)===4&&in_array('assets/js/admin.js',$staticSources,true),'manifest publishes only four allowlisted static assets including the admin controller');
 $check(($manifest['requires']['plugins']??null)===[],'Content Translation is not a hard dependency');
 $entry=(string)file_get_contents($root.'/plugin.php');$shortcodes=(string)file_get_contents($root.'/includes/shortcodes.php');
-$check(str_contains($entry,"const JYB_VERSION = '0.1.2'")&&str_contains($entry,'register_frontend_route'),'entrypoint version and frontend route are registered');
+$check(str_contains($entry,"const JYB_VERSION = '0.1.3'")&&str_contains($entry,'register_frontend_route'),'entrypoint version and frontend route are registered');
 $check(str_contains($shortcodes,"register_shortcode_source_provider('job_board_jobs'")&&str_contains($shortcodes,"'owner'=>'job-board'")&&str_contains($shortcodes,"'job_board_list'"),'Preset provider and namespaced widget identities are exact');
 $check(str_contains($shortcodes,"isset(\$GLOBALS['_widget_shortcode_handlers']['job_board_list'])")&&str_contains($entry,'shortcode integration collided'),'widget collisions fail rather than overwrite');
 $package=(string)file_get_contents($root.'/tools/build-package.php');

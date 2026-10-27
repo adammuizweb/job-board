@@ -8,9 +8,10 @@ $applyUrl = $application['type'] === 'none'
 ?>
 <article class="jyb-public jyb-single">
   <nav class="jyb-crumb" aria-label="<?= jyb_h(jyb_t('Breadcrumb')) ?>">
-    <a href="<?= jyb_h($listUrl) ?>"><?= jyb_h(jyb_t('Jobs')) ?></a>
-    <span aria-hidden="true">/</span>
-    <span><?= jyb_h($job['title']) ?></span>
+    <ol>
+      <li><a href="<?= jyb_h($listUrl) ?>"><?= jyb_h(jyb_t('Jobs')) ?></a></li>
+      <li aria-current="page"><span><?= jyb_h($job['title']) ?></span></li>
+    </ol>
   </nav>
   <header class="jyb-single-hero">
     <div>

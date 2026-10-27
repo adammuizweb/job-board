@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.3 - 2026-10-27
+
+- Reduced stacked vertical spacing on public job list and detail pages.
+- Improved long job-title sizing and stopped application cards from stretching
+  to the full hero height.
+- Reworked detail breadcrumbs with ordered-list semantics, current-page state,
+  responsive truncation, and a clearer visual separator.
+
 ## 0.1.2 - 2026-10-27
 
 - Added information-only vacancies that can be published without an application
