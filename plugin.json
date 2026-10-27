@@ -1,0 +1,62 @@
+{
+  "name": "job-board",
+  "version": "0.1.0",
+  "title": "Job Board",
+  "description": "Publish localized vacancies with companies, categories, and controlled application links.",
+  "author": "Adam Muiz",
+  "author_uri": "https://jyavani.com/member/adammuiz/",
+  "plugin_uri": "https://jyavani.com/plugin/job-board/",
+  "homepage": "https://github.com/adammuizweb/job-board",
+  "github_url": "https://github.com/adammuizweb/job-board",
+  "license": "MIT",
+  "store": {
+    "url": "https://jyavani.com/plugin-store",
+    "slug": "job-board"
+  },
+  "requires": {
+    "jyavani": ">=2.3.187",
+    "php": ">=8.1",
+    "extensions": ["pdo", "pdo_mysql", "json", "mbstring"],
+    "plugins": {}
+  },
+  "permissions": [
+    {"key":"plugin.job-board.workspace.read","label":"View Job Board Workspace","supports_scope":false,"default_roles":["admin","editor"],"delegable":true},
+    {"key":"plugin.job-board.jobs.create","label":"Create Job Board Jobs","supports_scope":false,"default_roles":["admin","editor"],"delegable":true},
+    {"key":"plugin.job-board.jobs.edit","label":"Edit Job Board Jobs","supports_scope":false,"default_roles":["admin","editor"],"delegable":true},
+    {"key":"plugin.job-board.jobs.publish","label":"Publish Job Board Content","supports_scope":false,"default_roles":["admin"],"delegable":true},
+    {"key":"plugin.job-board.companies.manage","label":"Manage Job Board Companies","supports_scope":false,"default_roles":["admin"],"delegable":true},
+    {"key":"plugin.job-board.categories.manage","label":"Manage Job Board Categories","supports_scope":false,"default_roles":["admin"],"delegable":true},
+    {"key":"plugin.job-board.settings.manage","label":"Manage Job Board Settings","supports_scope":false,"default_roles":["admin"],"delegable":false},
+    {"key":"plugin.job-board.audit.view","label":"View Job Board Audit Trail","supports_scope":false,"default_roles":["admin"],"delegable":true}
+  ],
+  "admin": {
+    "pages": [
+      {"route":"admin/tools/job-board","file":"admin/jobs/index.php","title":"Job Board","roles":["admin","editor"],"permission":"plugin.job-board.workspace.read"},
+      {"route":"admin/tools/job-board/jobs/create","file":"admin/jobs/edit.php","title":"Create Job","hidden":true,"roles":["admin","editor"],"permission":"plugin.job-board.jobs.create"},
+      {"route":"admin/tools/job-board/jobs/create-save","file":"admin/jobs/save.php","title":"Create Job","hidden":true,"roles":["admin","editor"],"permission":"plugin.job-board.jobs.create"},
+      {"route":"admin/tools/job-board/jobs/edit","file":"admin/jobs/edit.php","title":"Edit Job","hidden":true,"roles":["admin","editor"],"permission":"plugin.job-board.jobs.edit"},
+      {"route":"admin/tools/job-board/jobs/save","file":"admin/jobs/save.php","title":"Save Job","hidden":true,"roles":["admin","editor"],"permission":"plugin.job-board.jobs.edit"},
+      {"route":"admin/tools/job-board/jobs/transition","file":"admin/jobs/transition.php","title":"Transition Job","hidden":true,"roles":["admin"],"permission":"plugin.job-board.jobs.publish"},
+      {"route":"admin/tools/job-board/companies","file":"admin/companies/index.php","title":"Job Board Companies","hidden":true,"roles":["admin"],"permission":"plugin.job-board.companies.manage"},
+      {"route":"admin/tools/job-board/companies/edit","file":"admin/companies/edit.php","title":"Edit Job Board Company","hidden":true,"roles":["admin"],"permission":"plugin.job-board.companies.manage"},
+      {"route":"admin/tools/job-board/companies/save","file":"admin/companies/save.php","title":"Save Job Board Company","hidden":true,"roles":["admin"],"permission":"plugin.job-board.companies.manage"},
+      {"route":"admin/tools/job-board/categories","file":"admin/categories/index.php","title":"Job Board Categories","hidden":true,"roles":["admin"],"permission":"plugin.job-board.categories.manage"},
+      {"route":"admin/tools/job-board/categories/save","file":"admin/categories/save.php","title":"Save Job Board Category","hidden":true,"roles":["admin"],"permission":"plugin.job-board.categories.manage"},
+      {"route":"admin/tools/job-board/settings","file":"admin/settings/index.php","title":"Job Board Settings","hidden":true,"roles":["admin"],"permission":"plugin.job-board.settings.manage"},
+      {"route":"admin/tools/job-board/settings/save","file":"admin/settings/save.php","title":"Save Job Board Settings","hidden":true,"roles":["admin"],"permission":"plugin.job-board.settings.manage"},
+      {"route":"admin/tools/job-board/audit","file":"admin/audit/index.php","title":"Job Board Audit","hidden":true,"roles":["admin"],"permission":"plugin.job-board.audit.view"}
+    ],
+    "nav": [
+      {"label":"Job Board","icon":"clipboard-list","page":"admin/tools/job-board","parent":"tools","roles":["admin","editor"]}
+    ]
+  },
+  "static": {
+    "copy": [
+      {"from":"assets/css/frontend.css","to":"static/plugins/job-board/frontend.css"},
+      {"from":"assets/css/admin.css","to":"static/plugins/job-board/admin.css"},
+      {"from":"assets/js/admin.js","to":"static/plugins/job-board/admin.js"},
+      {"from":"assets/js/preset-editor.js","to":"static/plugins/job-board/preset-editor.js"}
+    ]
+  },
+  "assets": {"css":[],"js":[]}
+}
